@@ -1,0 +1,17 @@
+width=350
+height=540
+prompt=
+xoffset=20
+yoffset=15
+allow_images=true
+mode=drun
+exec_search=true
+insensitive=true
+colors=colors
+filter_rate=100
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+drun-display_generic=true
