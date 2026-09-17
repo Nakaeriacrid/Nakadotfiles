@@ -1,0 +1,103 @@
+ @define-color fundo rgba(99, 188, 216, 1);
+ @define-color rodape rgba(99, 173, 214, 1);
+ @define-color texto rgba(255,255,255,1);
+ @define-color uso-baixo rgba(0,255,0,1);
+ @define-color uso-medio rgba(255,255,0,1);
+ @define-color uso-alto rgba(255,0,0,1);
+
+ *{
+  border: none;
+  margin-top: 0px;
+  font-family: "Departure Mono";
+  font-size: 11px;
+  min-height: 8px;
+  font-weight: 500;
+  color: white;
+}
+
+window#waybar {
+  background-color: rgba(0,0,0,0);
+}
+
+#clock,
+#hardware {
+  padding-left: 6px;
+  padding-right: 6px;
+  background: linear-gradient(180deg, @fundo 30%, @rodape);
+  border: 2px solid black;
+}
+#musica {
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, @fundo 30%, @rodape);
+  border: 2px solid black;
+}
+#clock {
+  border-radius: 20px;
+  min-width: 100px;
+}
+#hardware {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 10px;
+  margin-left: 6px;
+}
+#cpu {
+  padding-right: 10px;
+  min-width: 35px;
+}
+#memory {
+  padding-left: 12px;
+  padding-right: 6px;
+  min-width: 35px;
+}
+#memory.normal {
+  color: @uso-baixo
+}
+#memory.uso-alto {
+  color: @uso-medio
+}
+#memory.uso-muito-alto {
+  color: @uso-alto
+}
+#power-profiles-daemon {
+  min-width: 35px;
+  font-size: 20px;
+}
+#power-profiles-daemon.performance {
+  color: @uso-alto
+}
+#power-profiles-daemon.balanced {
+  color: @uso-medio
+}
+#power-profiles-daemon.power-saver {
+  color: @uso-baixo
+}
+
+#musica {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 10px;
+  min-width: 100px;
+}
+#custom-ScrollMPRIS,
+#custom-ScrollMPRIS.playing,
+#custom-ScrollMPRIS.paused {
+  padding-left: 8px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+#wireplumber.muted,
+#wireplumber.sink-muted,
+#wireplumber.source-muted,
+#wireplumber {
+  border-radius: 15px;
+  padding-left: 6px;
+  padding-right: 6px;
+  min-width: 50px;
+  margin-right: 6px;
+}
+#tray {}

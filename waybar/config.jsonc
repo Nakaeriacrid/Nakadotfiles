@@ -1,0 +1,105 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 2,
+  "margin-bottom": 4,
+  "margin-right": 6,
+  "margin-left": 6,
+  "autohide": true,
+  "autohide-blocked": false,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "modules-left": [
+    "clock",
+    "group/hardware"
+  ],
+  "modules-center": [
+    
+  ],
+  "modules-right": [
+    "group/musica"
+  ],
+  "clock": {
+    "locale": "C",
+    "format": "{:%H:%M  %d/%m}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "month",
+      "iso8601": "true"
+    }
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "CPU: [{usage}% {avg_frequency}GHz]",
+    "tooltip": false
+  },
+  "memory": {
+    "format": " RAM: [{used} GB/{total} GB]",
+    "interval": 5,
+    "states": {
+      "normal": 10,
+      "uso-alto": 45,
+      "uso-muito-alto": 75
+    },
+    "tooltip": false
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip": false,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "wireplumber": {
+    "format": "{volume}%",
+    "scroll-step": 8,
+    "on-click": "helvum"
+  },
+  "custom/ScrollMPRIS": {
+    "return-type": "json",
+    "exec": "ScrollMPRIS -s 85 --scroll wrapping --format '{artist} // {title} - {album}' --no-status-icon --freeze --no-icon",
+    "escape": true,
+    "on-click": "playerctl play-pause"
+  },
+  "group/musica": {
+    "children-class": "msc",
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 200,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/ScrollMPRIS",
+      "wireplumber"
+    ]
+  },
+  "group/hardware": {
+    "children-class": "hwd",
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 200,
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "cpu",
+      "memory",
+      "power-profiles-daemon"
+    ]
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10,
+    "icons": {
+      "blueman": "bluetooth",
+      "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png",
+      "spotify": false
+    },
+    "orders": {
+      "wechat": 99
+    }
+  }
+}
