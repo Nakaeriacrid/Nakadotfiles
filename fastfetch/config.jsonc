@@ -1,0 +1,197 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "type": "auto",
+    "source": "$XDG_CONFIG_HOME/fastfetch/images/*",
+    "width": 29,
+    "height": 22,
+    "padding": {
+      "top": 0,
+      "left": 1,
+      "right": 1
+    },
+    "printRemaining": false,
+    "preserveAspectRatio": true,
+    "recache": false,
+    "position": "left",
+    "chafa": {
+      "fgOnly": false,
+      "symbols": "block+border+space-wide-inverted"
+    }
+  },
+  "display": {
+    "stat": false,
+    "pipe": false,
+    "showErrors": false,
+    "disableLinewrap": true,
+    "hideCursor": false,
+    "separator": " >>> ",
+    "color": {
+      "keys": "38;2;50;0;196",
+      "title": "38;2;100;50;196",
+      "output": "38;2;255;255;255",
+      "separator": "38;2;255;255;190"
+    },
+    "brightColor": false,
+    "duration": {
+      "abbreviation": false,
+      "spaceBeforeUnit": "default"
+    },
+    "size": {
+      "maxPrefix": "YB",
+      "binaryPrefix": "jedec",
+      "ndigits": 0,
+      "spaceBeforeUnit": "default"
+    },
+    "percent": {
+      "type": 2,
+      "color": {
+        "green": "#63FF40",
+        "yellow": "#FFF940",
+        "red": "#FF4040"
+      },
+      "spaceBeforeUnit": "default",
+      "width": 10
+    },
+    "bar": {
+      "char": {
+        "elapsed": "󰮯",
+        "total": "."
+      },
+      "border": {
+        "left": "",
+        "right": "",
+        "leftElapsed": "",
+        "rightElapsed": ""
+      },
+      "color": {
+        "elapsed": "auto",
+        "total": "#FFFFFF",
+        "border": ""
+      },
+      "width": 10
+    },
+    "fraction": {
+      "ndigits": 2
+    },
+    "noBuffer": false,
+    "key": {
+      "width": 0,
+      "type": "string",
+      "paddingLeft": 1
+    },
+    "freq": {
+      "ndigits": 1,
+      "spaceBeforeUnit": "default"
+    },
+    "constants": []
+  },
+  "general": {
+    "thread": true,
+    "processingTimeout": 5000,
+    "detectVersion": true,
+    "playerName": "",
+    "dsForceDrm": false
+  },
+  "modules": [
+    "break",
+    {
+      "type": "title",
+      "fqdn": false,
+      "format": "               {user-name-colored}{at-symbol-colored}{host-name-colored}",
+      "color": {
+        "user": "38;2;50;0;196",
+        "at": "38;2;189;32;107"
+      }
+    },
+    "break",
+    "break",
+    {
+      "type": "kernel",
+      "key": "Distro ",
+      "format": "{release}"
+    },
+    {
+      "type": "bootmgr",
+      "key": "Bootloader 󰇅",
+      "format": "{firmware-name}"
+    },
+    {
+      "type": "wm",
+      "key": "Window-Manager 󰨇",
+      "format": "{pretty-name}",
+      "detectPlugin": true
+    },
+    {
+      "type": "packages",
+      "key": "Pacotes 󰏔",
+      "format": "{pacman}",
+      "disabled": [
+        "apk"
+      ],
+      "combined": false
+    },
+    {
+      "type": "uptime",
+      "key": "Tempo-Ligado 󰦖"
+    },
+    {
+      "type": "shell",
+      "key": "Shell ",
+      "format": "{pretty-name}"
+    },
+    {
+      "type": "terminal",
+      "format": "{pretty-name}",
+      "key": "Terminal "
+    },
+    {
+      "type": "terminalfont",
+      "key": "Fonte-Terminal ",
+      "format": "{name}"
+    },
+    {
+      "type": "cpu",
+      "format": "{name}",
+      "key": "Processador  "
+    },
+    {
+      "type": "gpu",
+      "key": "Gpu  ",
+      "format": "{vendor} {name}",
+      "driverSpecific": false,
+      "detectionMethod": "pci",
+      "temp": false,
+      "hideType": "integrated"
+    },
+    {
+      "type": "memory",
+      "format": "{used} / {total}",
+      "key": "RAM "
+    },
+    "break",
+    {
+      "type": "disk",
+      "format": "{size-used} / {size-total}",
+      "key": "Disco ",
+      "showRegular": true,
+      "showExternal": true,
+      "showHidden": false,
+      "showSubvolumes": false,
+      "showReadOnly": true,
+      "showUnknown": false,
+      "folders": "",
+      "hideFolders": "/efi:/boot:/boot/*",
+      "hideFS": "",
+      "useAvailable": false,
+      "percent": {
+        "green": 40,
+        "yellow": 80,
+        "type": 2
+      }
+    },
+      "break",
+      "break",
+      "break"
+  ]
+}
