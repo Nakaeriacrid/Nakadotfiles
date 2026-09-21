@@ -7,20 +7,19 @@ hl.bind(spr .. " + F", hl.dsp.window.fullscreen({
     mode = maximized, 
     action = toggle
 })) 
-hl.bind("Print", hl.dsp.exec_cmd("flameshot full")) 
-hl.bind(alt .. " + Print", hl.dsp.exec_cmd("flameshot gui -s"))
-hl.bind(alt .. " + P", hl.dsp.exec_cmd("flameshot gui"))
+hl.bind("Print", hl.dsp.exec_cmd("flameshot full -c -p /home/nakaeri/Imagens/prints")) 
+hl.bind(alt .. " + Print", hl.dsp.exec_cmd("flameshot gui -s -c -p /home/nakaeri/Imagens/prints"))
+hl.bind(alt .. " + P", hl.dsp.exec_cmd("flameshot gui -c -p /home/nakaeri/Imagens/prints"))
 hl.bind(spr .. " + Q", hl.dsp.exec_cmd(terminal)) 
 hl.bind(spr .. " + X", hl.dsp.exec_cmd(menu)) 
 hl.bind(spr .. " + W", hl.dsp.exec_cmd(filemanager))
-hl.bind(alt .. " + F", hl.dsp.exec_cmd(mediaplayer))
+hl.bind(alt .. " + F", hl.dsp.exec_cmd(musica))
 hl.bind(spr .. " + L", hl.dsp.exec_cmd(browser))
-hl.bind(alt .. " + V", hl.dsp.exec_cmd(discord)) 
-hl.bind(alt .. " + L", hl.dsp.exec_cmd("lutris")) 
+hl.bind(alt .. " + V", hl.dsp.exec_cmd(discord))
 hl.bind(alt .. " + C", hl.dsp.exec_cmd(editor)) 
 hl.bind(spr .. " + P", hl.dsp.exec_cmd(sys)) 
 
-hl.bind(spr .. " + mouse:274", hl.dsp.window.close()) 
+
 hl.bind(alt .. " + mouse:274", hl.dsp.send_shortcut({
     mods = "CTRL SHIFT",
     key = "M",
@@ -35,19 +34,41 @@ hl.bind(alt .. " + SHIFT + mouse:274", hl.dsp.exec_cmd("playerctl loop track"))
 hl.bind(alt .. " + SHIFT + mouse_down", hl.dsp.exec_cmd("playerctl volume 0.05-"))
 hl.bind(alt .. " + SHIFT + mouse_up", hl.dsp.exec_cmd("playerctl volume 0.05+"))
 
-hl.bind(spr .. " + mouse_down", hl.dsp.focus({ 
-    workspace = "e-1" 
-}))                       
-hl.bind(spr .. " + mouse_up",   hl.dsp.focus({
-    workspace = "e+1" 
-}))
+hl.bind(spr .. " + mouse:274", hl.dsp.window.close())
+
+hl.bind(spr .. " + mouse_down", function()
+        local wws = hl.get_workspace("3")
+    if wws.windows == 1 then 
+        hl.dispatch(hl.dsp.focus({
+            workspace = "3"
+        }))
+    else
+        hl.dispatch(hl.dsp.focus({
+            workspace = "e-1"
+        }))
+    end
+end)
+
+hl.bind(spr .. " + mouse_up", function()
+        local wws = hl.get_workspace("3")
+    if wws.windows == 1 then 
+        hl.dispatch(hl.dsp.focus({
+            workspace = "3"
+        }))
+    else
+        hl.dispatch(hl.dsp.focus({
+            workspace = "e+1"
+        }))
+    end
+end)
+
 hl.bind(spr .. " + mouse:272", hl.dsp.window.drag(), {
     mouse = true
 })
 hl.bind(spr .. " + mouse:273", hl.dsp.window.resize(), { 
     mouse = true 
 })
-hl.bind(alt .. " + mouse_up", hl.dsp.layout("swapwithmaster"))
+hl.bind(alt .. " + mouse_up", hl.dsp.layout("swapwithmaster ignoremaster"))
 
 for i = 1, 10 do 
     local key = i % 10 

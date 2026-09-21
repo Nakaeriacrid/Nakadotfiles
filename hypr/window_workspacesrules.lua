@@ -85,7 +85,15 @@ hl.window_rule({
     },
     tag = "float"
 })
-
+hl.window_rule({
+    match = {
+        initial_class = "md.obsidian.Obsidian"
+    },
+    tag = "float",
+    size = {
+        "(monitor_w*0.35)", "(monitor_h*0.75)",
+    },
+})
 hl.window_rule({
     name = "bitwarden-float",
     match = {
@@ -103,13 +111,8 @@ hl.window_rule({
     name = "prism-launcher",
     match = {
         initial_class = "org.prismlauncher.PrismLauncher",
-        initial_title = ".*—.*"
     },
-    tag = "float",
-    size = {
-        "(monitor_w*0.21)", "(monitor_h*0.18)",
-    },
-    animation = "popin"
+    tag = "launcher",
 })
 hl.window_rule ({
     name = "obsidian",
@@ -145,7 +148,8 @@ hl.window_rule({
     size = {
         "(monitor_w*0.45)", "(monitor_h*0.60)",
     },
-    tag = "float"
+    tag = "float",
+    center = true,
 })
 hl.on("window.open", function()
     local w = hl.get_active_window()
@@ -153,6 +157,12 @@ hl.on("window.open", function()
         hl.dispatch(hl.dsp.layout("swapwithmaster master"))
     end
 end)
+
+hl.workspace_rule({
+    workspace = 3,
+    persistent = true
+})
+
 hl.window_rule({
     match = {
         initial_class = ".*.x86_64.*",
@@ -161,7 +171,7 @@ hl.window_rule({
 })
 hl.window_rule({
     match = {
-        initial_class = ".*mojang.*"
+        initial_class = ".*Minecraft.*"
     },
     tag = "game"
 })
@@ -170,6 +180,39 @@ hl.window_rule({
         initial_class = ".*steam_app_.*"
     },
     tag = "game"
+})
+hl.window_rule({
+    match = {
+        initial_class = ".*heroic.*"
+    },
+    tag = "launcher"
+})
+hl.window_rule({
+    match = {
+        initial_class = ".*hydralauncher.*"
+    },
+    tag = "launcher"
+})
+hl.window_rule({
+    match = {
+        initial_class = ".*lutris.*"
+    },
+    tag = "launcher"
+})
+hl.window_rule({
+    match = {
+        initial_class = ".*steam.*"
+    },
+    tag = "launcher"
+})
+hl.window_rule({
+    match = {
+        tag = "launcher"
+    },
+    workspace = 2,
+    tile = true,
+    center = true,
+    fullscreen_state = 0,
 })
 hl.window_rule({
     match = {
@@ -182,26 +225,6 @@ hl.window_rule({
     fullscreen_state = 0,
     no_anim = true
 })
-hl.window_rule({
-    name = "float",
-    match = {
-        tag = "float"
-    },
-    float = true,
-    border_size = 0,
-    animation = "slide",
-})
-
-hl.on("workspace.active", function(ws)
-    if ws.name == "3" then
-        hl.dispatch(hl.dsp.exec_cmd("pkill waybar"))
-    end
-    local lws = hl.get_last_workspace()
-    if lws.name == "3" then
-        hl.dispatch(hl.dsp.exec_cmd("waybar"))
-    end
-end)
-
 hl.workspace_rule({
     workspace = 3,
     gaps_in = 0,
@@ -209,4 +232,47 @@ hl.workspace_rule({
     decorate = false,
     no_rounding = true
 
+})
+
+hl.window_rule({
+    name = "float",
+    match = {
+        tag = "float"
+    },
+    float = true,
+    border_size = 0,
+})
+
+hl.on("workspace.active", function(ws, lws)
+    if ws.name == "3" or ws.name == "2" then
+        hl.dispatch(hl.dsp.exec_cmd("pkill waybar"))
+    end
+    local lws = hl.get_last_workspace()
+    local aw = hl.get_active_window()
+    if lws.name == "3" or lws.name == "2" and ws.name ~= "3" and ws.name ~= "2" and aw.fullscreen == 0 then
+        hl.dispatch(hl.dsp.exec_cmd("waybar"))
+    end
+end)
+hl.on("window.fullscreen", function()
+    local w = hl.get_active_window()
+    if w.fullscreen == 2 then
+        hl.dispatch(hl.dsp.exec_cmd("pkill waybar"))
+    elseif w.fullscreen == 0 then
+        hl.dispatch(hl.dsp.exec_cmd("waybar"))
+    end
+end)
+hl.on("window.destroy", function(ws)
+    local ws = hl.get_active_workspace()
+    if ws.windows == 0 and ws.name ~= "1" then
+        hl.dispatch(hl.dsp.focus({
+            workspace = 1
+        }))
+    end
+end)
+
+hl.layer_rule({
+    match = {
+        namespace = "wofi"
+    },
+    dim_around = true,
 })

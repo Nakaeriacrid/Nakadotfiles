@@ -6,7 +6,7 @@ filemanager = "kitty -e yazi $HOME/"
 menu = "wofi"
 browser = "helium-browser"
 discord = "vesktop --ozone-platform-hint=auto"
-mediaplayer = "flatpak run org.jeffvli.feishin"
+musica = "feishin"
 sys = "kitty -e btop"
 
 -- Teclas mod

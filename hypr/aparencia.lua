@@ -3,7 +3,7 @@
 hl.config({
     general = {
         gaps_in  = 2,
-        gaps_out = { top = 0, left = 2, right = 2, bottom = 2},
+        gaps_out = { top = 0, left = 10, right = 10, bottom = 2},
         gaps_workspaces = 0,
         border_size = 2,
 
