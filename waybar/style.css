@@ -1,5 +1,5 @@
- @define-color fundo rgba(99, 188, 216, 1);
- @define-color rodape rgba(99, 173, 214, 1);
+ @define-color fundo rgba(99, 188, 216, 0.8);
+ @define-color rodape rgba(99, 173, 214, 0.8);
  @define-color texto rgba(255,255,255,1);
  @define-color uso-baixo rgba(0,255,0,1);
  @define-color uso-medio rgba(255,255,0,1);
