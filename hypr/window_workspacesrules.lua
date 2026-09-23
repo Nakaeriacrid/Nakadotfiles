@@ -1,5 +1,4 @@
 local suppressMaximizeRule = hl.window_rule({
-    name  = "suppress-maximize-events",
     match = {
       class = ".*" 
     },
@@ -7,7 +6,6 @@ local suppressMaximizeRule = hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "fix-xwayland-drags",
     match = {
         class      = "^$",
         title      = "^$",
@@ -36,7 +34,6 @@ hl.window_rule({
     move  = { "cursor_x-(window_w*0.5)", "cursor_y-(window_h*0.5)" },
 })
 hl.window_rule({
-    name  = "move-hyprland-run",
     match = {
         class = "hyprland-run" 
     },
@@ -44,7 +41,6 @@ hl.window_rule({
     float = true,
 })
 hl.window_rule({
-    name = "videos",
     match = {
         initial_class = "mpv"
     },
@@ -53,7 +49,6 @@ hl.window_rule({
     fullscreen_state = 2,
 })
 hl.window_rule({
-    name = "PiP",
     match = {
         initial_title = "Picture-in-picture"
     },
@@ -69,21 +64,18 @@ hl.window_rule({
         "(monitor_w*0.05)", "(monitor_h*0.15)"
     }
 })
-
 hl.window_rule({
-    name = "media-player",
+    match = {
+        initial_class = "helium"
+    },
+    opacity = "1.0 override 1.0 override 1.0 override"
+})
+hl.window_rule({
     match = {
         initial_class = "org.jellyfin.JellyfinDesktop"
     },
-    fullscreen_state = 2
-})
-hl.window_rule({
-    name = "steam-float",
-    match = {
-        initial_class = "steam",
-        initial_title = "negative:Steam"
-    },
-    tag = "float"
+    fullscreen_state = 2,
+    workspace = 2
 })
 hl.window_rule({
     match = {
@@ -95,7 +87,6 @@ hl.window_rule({
     },
 })
 hl.window_rule({
-    name = "bitwarden-float",
     match = {
         initial_title = "_crx_nngceckbapebfimnlniiiahkandclblb"
     },
@@ -108,14 +99,12 @@ hl.window_rule({
     },
 })
 hl.window_rule({
-    name = "prism-launcher",
     match = {
         initial_class = "org.prismlauncher.PrismLauncher",
     },
     tag = "launcher",
 })
 hl.window_rule ({
-    name = "obsidian",
     match = {
         initial_class = "obsidian",
     },
@@ -128,7 +117,6 @@ hl.window_rule ({
     }
 })
 hl.window_rule({
-    name = "pop-up-gtk",
     match = {
         initial_class = "xdg-desktop-portal-gtk"
     },
@@ -141,7 +129,6 @@ hl.window_rule({
     },
 })
 hl.window_rule({
-    name = "pop-up-screenshare",
     match = {
         initial_class = "hyprland-share-picker"
     },
@@ -157,11 +144,6 @@ hl.on("window.open", function()
         hl.dispatch(hl.dsp.layout("swapwithmaster master"))
     end
 end)
-
-hl.workspace_rule({
-    workspace = 3,
-    persistent = true
-})
 
 hl.window_rule({
     match = {
@@ -201,7 +183,7 @@ hl.window_rule({
 })
 hl.window_rule({
     match = {
-        initial_class = ".*steam.*"
+        initial_title = ".*Steam.*"
     },
     tag = "launcher"
 })
@@ -219,23 +201,29 @@ hl.window_rule({
         tag = "game"
     },
     workspace = 3,
+    confine_pointer = true,
     tile = true,
     center = true,
     immediate = true,
     fullscreen_state = 0,
     no_anim = true
 })
+
+hl.workspace_rule({
+    workspace = 2,
+    persistent = true
+})
 hl.workspace_rule({
     workspace = 3,
     gaps_in = 0,
     gaps_out = 0,
     decorate = false,
+    persistent = true,
     no_rounding = true
 
 })
 
 hl.window_rule({
-    name = "float",
     match = {
         tag = "float"
     },
@@ -248,19 +236,11 @@ hl.on("workspace.active", function(ws, lws)
         hl.dispatch(hl.dsp.exec_cmd("pkill waybar"))
     end
     local lws = hl.get_last_workspace()
-    local aw = hl.get_active_window()
-    if lws.name == "3" or lws.name == "2" and ws.name ~= "3" and ws.name ~= "2" and aw.fullscreen == 0 then
+    if lws.name == "3" or lws.name == "2" then
         hl.dispatch(hl.dsp.exec_cmd("waybar"))
     end
 end)
-hl.on("window.fullscreen", function()
-    local w = hl.get_active_window()
-    if w.fullscreen == 2 then
-        hl.dispatch(hl.dsp.exec_cmd("pkill waybar"))
-    elseif w.fullscreen == 0 then
-        hl.dispatch(hl.dsp.exec_cmd("waybar"))
-    end
-end)
+
 hl.on("window.destroy", function(ws)
     local ws = hl.get_active_workspace()
     if ws.windows == 0 and ws.name ~= "1" then

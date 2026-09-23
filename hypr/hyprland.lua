@@ -11,7 +11,7 @@ hl.monitor({
 hl.on("hyprland.start", function ()
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("waybar & steam -silent & hyprpaper & swaync & openrgb --noautoconnect -p Vermeio")
+  hl.exec_cmd("waybar & hyprpaper & swaync & openrgb --noautoconnect -p Vermeio")
   hl.exec_cmd(browser, {workspace = 1})
   hl.exec_cmd("kitty -d '.local/share/Steam/steamapps/common/Valheim dedicated server' -e ./start_server_bepinex.sh", {workspace = "10 silent"})
 end)

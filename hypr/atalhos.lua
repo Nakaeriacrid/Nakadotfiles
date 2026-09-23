@@ -3,10 +3,21 @@
 
 hl.bind(spr .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")) 
 hl.bind(spr .. " + I", hl.dsp.exec_cmd("pkill waybar && waybar")) 
-hl.bind(spr .. " + F", hl.dsp.window.fullscreen({ 
-    mode = maximized, 
-    action = toggle
-})) 
+hl.bind(spr .. " + F", function()
+    local w = hl.get_active_window()
+    if w.fullscreen == 0 then
+        hl.dispatch(hl.dsp.window.fullscreen_state({ 
+        internal = 1,
+        client = 0
+        }))
+    elseif w.fullscreen > 0 then
+        hl.dispatch(hl.dsp.window.fullscreen_state({
+            internal = 0,
+            client = 0
+        }))
+    end
+end)
+
 hl.bind("Print", hl.dsp.exec_cmd("flameshot full -c -p /home/nakaeri/Imagens/prints")) 
 hl.bind(alt .. " + Print", hl.dsp.exec_cmd("flameshot gui -s -c -p /home/nakaeri/Imagens/prints"))
 hl.bind(alt .. " + P", hl.dsp.exec_cmd("flameshot gui -c -p /home/nakaeri/Imagens/prints"))
@@ -68,7 +79,8 @@ hl.bind(spr .. " + mouse:272", hl.dsp.window.drag(), {
 hl.bind(spr .. " + mouse:273", hl.dsp.window.resize(), { 
     mouse = true 
 })
-hl.bind(alt .. " + mouse_up", hl.dsp.layout("swapwithmaster ignoremaster"))
+hl.bind(alt .. " + mouse_up", hl.dsp.layout("rollnext"))
+hl.bind(alt .. " + mouse_down", hl.dsp.layout("rollprev"))
 
 for i = 1, 10 do 
     local key = i % 10 
